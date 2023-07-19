@@ -18,7 +18,7 @@ const addTask = () => {
   if (taskText !== '') {
     const taskItem = createTaskItem(taskText)
     todoList.appendChild(taskItem)
-    todoInput.value =''
+    todoInput.value = ''
   }
 }
 
@@ -41,7 +41,7 @@ const createTaskItem = (taskText) => {
   deleteBtn.addEventListener('click', deleteTask)
 
   taskItem.appendChild(checkbox)
-  taskItem.appendChild(taskTextSpan) 
+  taskItem.appendChild(taskTextSpan)
   taskItem.appendChild(deleteBtn)
 
   return taskItem
@@ -52,15 +52,32 @@ const deleteTask = (event) => {
   todoList.removeChild(taskItem)
 }
 
-const toggleTask = (event)=> {
+const toggleTask = (event) => {
   const taskItem = event.target.parentNode
   taskItem.classList.add('completed')
 }
 
+// Event Listeners:
+
 addTaskButton.addEventListener('click', addTask)
 
-todoInput.addEventListener('keydown', function(event){
-  if(event.key === 'Enter') {
+todoInput.addEventListener('keydown', function (event) {
+  if (event.key === 'Enter') {
     addTask()
   }
+})
+
+todoList.addEventListener('change', toggleTask)
+
+
+
+const intitialTasks = [
+  'Buy groceries',
+  'Clean house',
+  'Fix kitchen sink',
+]
+
+intitialTasks.forEach((task) => {
+  const taskItem = createTaskItem(task)
+  todoList.appendChild(taskItem)
 })
